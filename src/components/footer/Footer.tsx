@@ -21,11 +21,10 @@ export default function Footer() {
         </div>
       </div>
       <div className="mx-auto w-full text-black">
-        <div />
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0"></div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            <div />
+            <div className="hidden lg:flex" />
             <div>
               <h2 className="mb-6 text-sm font-semibold">CONTACTO</h2>
               <ul>
