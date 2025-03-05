@@ -5,7 +5,7 @@ export default function ContactSection() {
   const [sent, setSent] = useState(false);
   return (
     <section className=" dark:bg-gray-900 z-40">
-      <div className="py-2 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-4">
+      <div className="py-2 px-4 mx-auto lg:py-16 lg:px-4 max-w-2xl">
         <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
           <h2 className="mb-6 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
             ¿Tienes dudas?

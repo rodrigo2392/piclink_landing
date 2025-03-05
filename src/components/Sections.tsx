@@ -46,26 +46,18 @@ const testimonials = [
 
 const sections = [
   {
-    title: "Planes a tu medida",
-    subtitle: "Obtienes 10gb al crear tu cuenta 100% gratis",
     background: "bg-[#beb2b2] md:bg-[#d2d2d2]",
     component: <PricingSection />,
   },
   {
-    title: "Es gratis 2",
-    subtitle: "Obtienes 10gb al crear tu cuenta 100% gratis",
     background: "bg-[#dbd5d5] md:bg-[#ededed]",
     component: <AnimatedTestimonials testimonials={testimonials} />,
   },
   {
-    title: "Es gratis 3",
-    subtitle: "Obtienes 10gb al crear tu cuenta 100% gratis",
     background: "bg-[#beb2b2] md:bg-[#d2d2d2]",
     component: <ContactSection />,
   },
   {
-    title: "Es gratis 4",
-    subtitle: "Obtienes 10gb al crear tu cuenta 100% gratis",
     background: "bg-[#dbd5d5] md:bg-[#ededed]",
     component: <Footer />,
   },
@@ -78,9 +70,9 @@ export default function Sections() {
       className="w-full relative snap-mandatory snap-both overscroll-contain snap-always snap-center"
     >
       <AnimatePresence>
-        {sections.map((el) => (
+        {sections.map((el, index) => (
           <motion.div
-            key={el.title}
+            key={index}
             initial={{ opacity: 0.0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -89,10 +81,10 @@ export default function Sections() {
               duration: 0.5,
               ease: "easeInOut",
             }}
-            className={`${el.background} z-20 md:sticky top-0 h-auto md:h-screen flex flex-col items-center -mt-10 md:mt-0 rounded-t-[40px] md:rounded-none pb-20 md:pb-0 `}
+            className={`${el.background} z-20 md:sticky top-0 h-auto md:h-screen flex flex-col items-center -mt-10 md:mt-0 rounded-t-[40px] md:rounded-none pb-20 md:pb-0 w-full`}
           >
             <AuroraBackground>
-              <div className="max-w-[1440px] pt-12 flex flex-col px-6 md:px-0 ">
+              <div className="max-w-[1440px] pt-12 flex flex-col px-6 md:px-0 w-full">
                 {el.component}
               </div>
             </AuroraBackground>

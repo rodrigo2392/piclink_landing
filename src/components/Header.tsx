@@ -9,7 +9,7 @@ const FamilyNormal = localFont({ src: "../app/family-light.woff2" });
 export default function Header() {
   return (
     <>
-      <header className="justify-center bg-[url(/bg-mobile.jpg)] md:bg-[url('/bg-desktop.avif')] flex px-10 flex-col md:flex-row sticky top-0 bg-cover bg-fixed bg-center bg-no-repeat bg-black bg-opacity-10">
+      <header className="justify-center bg-[url('/bg-mobile.jpg')] md:bg-[url('/bg-desktop.avif')] flex px-10 flex-col md:flex-row sticky top-0 bg-cover bg-fixed bg-center bg-no-repeat bg-black bg-opacity-10">
         <div className="text-center max-w-[1440px] mt-auto z-10 items-center md:items-start gap-2 w-full h-screen md:h-screen flex justify-start md:justify-center flex-col pt-24">
           <h1 className={`text-8xl font-bold ${FamilyNormal.className}`}>
             Piclink

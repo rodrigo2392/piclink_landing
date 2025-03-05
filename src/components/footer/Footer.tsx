@@ -3,9 +3,9 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="p-4 text-white min-w-[70vw] h-[90vh] flex flex-col justify-center items-center z-40">
+    <footer className="p-4 text-white max-w-[1440px] h-[90vh] flex flex-col justify-center items-center z-40">
       <div className="h-full rounded-md  relative flex flex-col items-center justify-center antialiased z-40 w-full">
-        <div className="mx-auto pt-10 flex flex-col items-center gap-2">
+        <div className="w-full pt-10 flex flex-col items-center gap-2">
           <h1 className="relative z-10 text-3xl md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-400 to-neutral-800  text-center font-sans font-bold">
             Únete a Piclink ahora
           </h1>
@@ -21,9 +21,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="mx-auto w-full text-black">
+        <div />
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0"></div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div />
             <div>
               <h2 className="mb-6 text-sm font-semibold">CONTACTO</h2>
               <ul>
@@ -54,7 +56,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr className="my-6 border-gray-300 sm:mx-auto  lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm  sm:text-center dark:text-gray-400">
             © {new Date().getFullYear()}{" "}

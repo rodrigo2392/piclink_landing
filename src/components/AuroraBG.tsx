@@ -11,7 +11,7 @@ export const AuroraBackground = ({
   showRadialGradient = true,
 }: AuroraBackgroundProps) => {
   return (
-    <div>
+    <>
       <div className="absolute inset-0 overflow-hidden z-20 rounded-t-[40px] md:rounded-none">
         <div
           className={cn(
@@ -34,6 +34,6 @@ export const AuroraBackground = ({
         ></div>
       </div>
       {children}
-    </div>
+    </>
   );
 };
