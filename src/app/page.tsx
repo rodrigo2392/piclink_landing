@@ -354,12 +354,13 @@ function HeroSection() {
           </motion.div>
 
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 bg-clip-text text-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {t("hero.title")} <br className="hidden md:block" />
+            <span className="text-white">{t("hero.title")}</span>
+            <br className="hidden md:block" />
             <span className="text-white">{t("hero.titleHighlight")}</span>
           </motion.h1>
 
