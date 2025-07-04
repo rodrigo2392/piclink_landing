@@ -3,7 +3,13 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useAnimation, useInView } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useInView,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowRight,
   CheckCircle,
@@ -12,6 +18,11 @@ import {
   Download,
   Users,
   Shield,
+  /*TrendingUp,
+  Globe,*/
+  Clock,
+  Share2,
+  Eye,
   User,
 } from "lucide-react";
 
@@ -26,12 +37,266 @@ export default function LandingPage() {
       <SiteHeader />
       <HeroSection />
       <FeaturesSection />
-      <GallerySection />
+      <StatsWorkflowSection />
       <PricingSection />
       <TestimonialsSection />
       <CtaSection />
       <Footer />
     </div>
+  );
+}
+
+function StatsWorkflowSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Parallax effects
+  const { scrollY } = useScroll();
+  const statsY = useTransform(scrollY, [1500, 3000], [0, -100]);
+  const floatingY = useTransform(scrollY, [1500, 3000], [0, -200]);
+
+  // Platform statistics
+  /*const stats = [
+    {
+      icon: <Users className="h-8 w-8" />,
+      number: "50,000+",
+      label: "Fotógrafos Activos",
+      gradient: "from-gray-600 to-gray-800",
+    },
+    {
+      icon: <ImageIcon className="h-8 w-8" />,
+      number: "2.5M+",
+      label: "Fotos Entregadas",
+      gradient: "from-gray-700 to-gray-900",
+    },
+    {
+      icon: <Globe className="h-8 w-8" />,
+      number: "99.9%",
+      label: "Tiempo de Actividad",
+      gradient: "from-gray-500 to-gray-700",
+    },
+    {
+      icon: <TrendingUp className="h-8 w-8" />,
+      number: "300%",
+      label: "Entrega Más Rápida",
+      gradient: "from-gray-800 to-black",
+    },
+  ];*/
+
+  // Workflow steps
+  const workflowSteps = [
+    {
+      step: "01",
+      icon: <Upload className="h-6 w-6" />,
+      title: "Sube tu Trabajo",
+      description:
+        "Arrastra y suelta sesiones fotográficas completas con nuestro cargador masivo ultrarrápido",
+      gradient: "from-gray-600 to-gray-800",
+    },
+    {
+      step: "02",
+      icon: <Eye className="h-6 w-6" />,
+      title: "Organiza y Previsualiza",
+      description:
+        "Auto-organiza fotos y crea galerías impresionantes con vistas previas de un clic",
+      gradient: "from-gray-700 to-gray-900",
+    },
+    {
+      step: "03",
+      icon: <Share2 className="h-6 w-6" />,
+      title: "Comparte con Clientes",
+      description:
+        "Envía galerías seguras y con marca personalizada con controles de acceso personalizados",
+      gradient: "from-gray-500 to-gray-700",
+    },
+    {
+      step: "04",
+      icon: <Download className="h-6 w-6" />,
+      title: "Descargas de Clientes",
+      description:
+        "Los clientes pueden descargar imágenes en alta resolución al instante con protección de marca de agua",
+      gradient: "from-gray-800 to-black",
+    },
+  ];
+
+  return (
+    <section
+      className="py-16 sm:py-20 md:py-24 bg-white dark:bg-black relative overflow-hidden"
+      id="how"
+      ref={ref}
+    >
+      {/* Parallax floating elements */}
+      <motion.div
+        style={{ y: floatingY }}
+        className="absolute top-10 right-10 w-24 h-24 bg-gray-100/20 dark:bg-gray-900/20 rounded-full blur-2xl"
+      />
+      <motion.div
+        style={{ y: statsY }}
+        className="absolute bottom-10 left-10 w-32 h-32 bg-gray-200/10 dark:bg-gray-800/10 rounded-full blur-xl"
+      />
+
+      <div className="container px-4 sm:px-6 lg:px-8 relative">
+        {/* Platform Statistics */}
+        {/*<motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={
+              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+            }
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-full text-sm font-medium mb-6"
+          >
+            <TrendingUp className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+            <span className="text-gray-600 dark:text-gray-400">
+              Confiado por Profesionales
+            </span>
+          </motion.div>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            Rendimiento de la Plataforma
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-16">
+            Únete a miles de fotógrafos que confían en nuestra plataforma para
+            sus entregas más importantes
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, y: 0, scale: 1 }
+                    : { opacity: 0, y: 30, scale: 0.9 }
+                }
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group"
+              >
+                <Card className="relative bg-white dark:bg-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                  />
+                  <CardContent className="p-8 text-center">
+                    <motion.div
+                      className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.gradient} text-white mb-4 shadow-lg`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {stat.icon}
+                    </motion.div>
+                    <motion.div
+                      className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white"
+                      initial={{ scale: 1 }}
+                      animate={isInView ? { scale: [1, 1.1, 1] } : { scale: 1 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <p className="text-gray-600 dark:text-gray-400 font-medium">
+                      {stat.label}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>*/}
+
+        {/* Workflow Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={
+              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+            }
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-full text-sm font-medium mb-6"
+          >
+            <Clock className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+            <span className="text-gray-600 dark:text-gray-400">
+              Flujo de Trabajo Simple
+            </span>
+          </motion.div>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            Cómo Funciona
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            De la carga a la entrega en solo 4 pasos simples. Optimiza tu flujo
+            de trabajo fotográfico hoy.
+          </p>
+        </motion.div>
+
+        {/* Workflow Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          {workflowSteps.map((step, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, delay: index * 0.2 + 0.8 }}
+              className="relative group"
+            >
+              {/* Connection Line */}
+              {index < workflowSteps.length - 1 && (
+                <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-gray-300 to-transparent dark:from-gray-700 z-0">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-gray-600 to-gray-400 dark:from-gray-400 dark:to-gray-600"
+                    initial={{ width: "0%" }}
+                    animate={isInView ? { width: "100%" } : { width: "0%" }}
+                    transition={{ duration: 1, delay: index * 0.2 + 1.5 }}
+                  />
+                </div>
+              )}
+
+              <Card className="relative bg-white dark:bg-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden h-full">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                />
+                <CardContent className="p-8 text-center relative z-10">
+                  {/* Step Number */}
+                  <motion.div
+                    className="absolute z-30 -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-gray-800 to-black dark:from-gray-200 dark:to-white text-white dark:text-black rounded-full flex items-center justify-center font-bold text-lg shadow-lg"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {step.step}
+                  </motion.div>
+
+                  {/* Icon */}
+                  <motion.div
+                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${step.gradient} text-white mb-6 shadow-lg`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {step.icon}
+                  </motion.div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {step.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -60,7 +325,7 @@ function HeroSection() {
           className="object-cover opacity-50 dark:opacity-50"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black dark:from-black/10 dark:via-black/10 dark:to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black "></div>
       </div>
 
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
@@ -83,25 +348,23 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-block mb-6"
           >
-            <span className="bg-gradient-to-r from-violet-700 to-purple-500 px-4 py-1 rounded-full text-sm font-medium text-white">
+            <span className="bg-blue-600  px-4 py-1 rounded-full text-sm font-medium text-white">
               {t("hero.badge")}
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-white"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {t("hero.title")} <br className="hidden md:block" />
-            <span className="text-violet-600 dark:text-violet-400">
-              {t("hero.titleHighlight")}
-            </span>
+            <span className="text-white">{t("hero.titleHighlight")}</span>
           </motion.h1>
 
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8"
+            className="text-base sm:text-lg md:text-xl text-gray-200 mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -117,13 +380,13 @@ function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-violet-900 hover:bg-violet-700 text-white"
+              className="bg-blue-600 hover:bg-gray-800 text-white border-gray-800 border"
             >
               {t("hero.cta")} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
               size="lg"
-              className="bg-violet-900 text-white hover:bg-violet-700 "
+              className="bg-blue-600 hover:bg-gray-800 text-white border-gray-800 border "
             >
               {t("hero.secondaryCta")}
             </Button>
@@ -137,13 +400,13 @@ function HeroSection() {
         transition={{ duration: 1, delay: 1.2 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-          <span>{t("hero.scroll")}</span>
+        <div className="flex flex-col items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <span className="text-lg">{t("hero.scroll")}</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
           >
-            <ArrowRight className="h-4 w-4 rotate-90" />
+            <ArrowRight className="h-10 w-10 rotate-90" />
           </motion.div>
         </div>
       </motion.div>
@@ -237,67 +500,6 @@ function FeaturesSection() {
   );
 }
 
-function GallerySection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { t } = useLanguage();
-
-  const galleryImages = [
-    { src: "/placeholder.svg?height=600&width=800", alt: "Gallery image 1" },
-    { src: "/placeholder.svg?height=600&width=800", alt: "Gallery image 2" },
-    { src: "/placeholder.svg?height=600&width=800", alt: "Gallery image 3" },
-    { src: "/placeholder.svg?height=600&width=800", alt: "Gallery image 4" },
-    { src: "/placeholder.svg?height=600&width=800", alt: "Gallery image 5" },
-    { src: "/placeholder.svg?height=600&width=800", alt: "Gallery image 6" },
-  ];
-
-  return (
-    <section
-      ref={ref}
-      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-black"
-    >
-      <div className="container px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t("gallery.title")}
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {t("gallery.subtitle")}
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {galleryImages.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative aspect-square overflow-hidden rounded-lg"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Image
-                src={image.src || "/placeholder.svg"}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-110"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function PricingSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -306,20 +508,20 @@ function PricingSection() {
   const plans = [
     {
       name: t("pricing.plans.starter.name"),
-      price: "$19",
+      price: "$100",
       description: t("pricing.plans.starter.description"),
       features: t("pricing.plans.starter.features"),
     },
     {
       name: t("pricing.plans.professional.name"),
-      price: "$49",
+      price: "$300",
       description: t("pricing.plans.professional.description"),
       features: t("pricing.plans.professional.features"),
       popular: true,
     },
     {
       name: t("pricing.plans.studio.name"),
-      price: "$99",
+      price: "$1200",
       description: t("pricing.plans.studio.description"),
       features: t("pricing.plans.studio.features"),
     },
@@ -357,13 +559,13 @@ function PricingSection() {
               <Card
                 className={`h-full ${
                   plan.popular
-                    ? "border-purple-500 bg-white dark:bg-gray-900/70"
-                    : "bg-white/30 dark:bg-gray-900/30 border-gray-200 dark:border-gray-800"
+                    ? "border-blue-500 bg-white dark:bg-gray-900/70"
+                    : "pt-10 bg-white/30 dark:bg-gray-900/30 border-gray-200 dark:border-gray-800"
                 }`}
               >
                 <CardContent className="p-6">
                   {plan.popular && (
-                    <div className="bg-purple-500 text-white text-xs font-bold uppercase tracking-wider py-1 px-2 rounded-full inline-block mb-4">
+                    <div className="bg-blue-500 text-white text-xs font-bold uppercase tracking-wider py-1 px-2 rounded-full inline-block mb-4">
                       {t("pricing.mostPopular")}
                     </div>
                   )}
@@ -377,18 +579,20 @@ function PricingSection() {
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
                     {plan.description}
                   </p>
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-purple-500 mr-2 shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
+                  <ul className="space-y-3 mb-6 h-60">
+                    {(plan.features as unknown as string[]).map(
+                      (feature, i) => (
+                        <li key={i} className="flex items-start">
+                          <CheckCircle className="h-5 w-5 text-blue-500 mr-2 shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      )
+                    )}
                   </ul>
                   <Button
                     className={`w-full ${
                       plan.popular
-                        ? "bg-purple-600 hover:bg-purple-700"
+                        ? "bg-blue-600 hover:bg-blue-700"
                         : "bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
                     }`}
                   >
@@ -458,14 +662,16 @@ function TestimonialsSection() {
             >
               <Card className="bg-white/30 dark:bg-gray-900/30 border-gray-200 dark:border-gray-800 h-full">
                 <CardContent className="p-6">
-                  <div className="mb-4 text-purple-500">
+                  <div className="mb-4 text-blue-500">
                     {[...Array(5)].map((_, i) => (
                       <span key={i} className="text-xl">
                         ★
                       </span>
                     ))}
                   </div>
-                  <p className="text-lg mb-6 italic">"{testimonial.quote}"</p>
+                  <p className="text-lg mb-6 italic">
+                    &quot;{testimonial.quote}&quot;
+                  </p>
                   <div>
                     <p className="font-semibold">{testimonial.author}</p>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -491,7 +697,7 @@ function CtaSection() {
     <section
       id="contact"
       ref={ref}
-      className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-purple-50 dark:from-black dark:to-purple-950"
+      className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-purple-50 dark:from-black dark:to-blue-900"
     >
       <div className="container px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -516,26 +722,11 @@ function CtaSection() {
           >
             <Button
               size="lg"
-              className="bg-purple-600 hover:bg-purple-700 text-white"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               {t("cta.primaryButton")}
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-purple-500 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30"
-            >
-              {t("cta.secondaryButton")}
-            </Button>
           </motion.div>
-          <motion.p
-            className="text-sm text-gray-600 dark:text-gray-400 mt-4"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            {t("cta.noCreditCard")}
-          </motion.p>
         </motion.div>
       </div>
     </section>

@@ -43,6 +43,7 @@ export function SiteHeader() {
 
   const menuItems = [
     { href: "#features", label: t("nav.features") },
+    { href: "#how", label: t("nav.how") },
     { href: "#pricing", label: t("nav.pricing") },
     { href: "#testimonials", label: t("nav.testimonials") },
     { href: "#contact", label: t("nav.contact") },
@@ -76,11 +77,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex items-center space-x-1">
-              <ThemeToggle />
-              <LanguageSwitcher />
-            </div>
-            <Button className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-violet-900 dark:hover:bg-gray-100 dark:text-white">
+            <Button className="bg-blue-600 hover:bg-gray-800 text-white ">
               {t("hero.cta")}
             </Button>
           </nav>

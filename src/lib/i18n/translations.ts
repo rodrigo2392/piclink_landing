@@ -114,6 +114,7 @@ export type Translations = {
     features: string;
     pricing: string;
     testimonials: string;
+    how: string;
     contact: string;
     toggleTheme: string;
     language: string;
@@ -272,6 +273,7 @@ export const translations: Record<Language, Translations> = {
       features: "Features",
       pricing: "Pricing",
       testimonials: "Testimonials",
+      how: "Cómo funciona",
       contact: "Contact",
       toggleTheme: "Toggle theme",
       language: "Language",
@@ -286,7 +288,7 @@ export const translations: Record<Language, Translations> = {
         "La plataforma definitiva para que los fotógrafos almacenen, gestionen y entreguen contenido multimedia de alta calidad a sus clientes con una velocidad ultrarrápida.",
       cta: "Iniciar Prueba Gratuita",
       secondaryCta: "Ver Demostración",
-      scroll: "Desplázate para explorar",
+      scroll: "Desplázate para ver más",
     },
     features: {
       title: "Potentes Funciones para Fotógrafos",
@@ -340,7 +342,8 @@ export const translations: Record<Language, Translations> = {
       plans: {
         starter: {
           name: "Inicial",
-          description: "Perfecto para principiantes y aficionados",
+          description:
+            "Perfecto para principiantes y aficionados que buscan verse profesionales.",
           features: [
             "10GB de almacenamiento",
             "100GB de ancho de banda mensual",
@@ -351,7 +354,7 @@ export const translations: Record<Language, Translations> = {
         },
         professional: {
           name: "Profesional",
-          description: "Para fotógrafos serios con necesidades crecientes",
+          description: "Para fotógrafos serios con necesidades crecientes.",
           features: [
             "100GB de almacenamiento",
             "1TB de ancho de banda mensual",
@@ -363,7 +366,8 @@ export const translations: Record<Language, Translations> = {
         },
         studio: {
           name: "Estudio",
-          description: "Para estudios fotográficos y equipos",
+          description:
+            "Para estudios fotográficos y equipos de trabajo grandes.",
           features: [
             "500GB de almacenamiento",
             "5TB de ancho de banda mensual",
@@ -429,6 +433,7 @@ export const translations: Record<Language, Translations> = {
       features: "Características",
       pricing: "Precios",
       testimonials: "Testimonios",
+      how: "Cómo funciona",
       contact: "Contacto",
       toggleTheme: "Cambiar tema",
       language: "Idioma",
