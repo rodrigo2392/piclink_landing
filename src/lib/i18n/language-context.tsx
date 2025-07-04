@@ -38,14 +38,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Function to get nested translation values using dot notation
   const t = (key: string): string => {
     const keys = key.split(".");
-    let value: any = translations[language];
+    let value: unknown = translations[language];
 
     for (const k of keys) {
-      if (value === undefined) return key;
-      value = value[k];
+      if (typeof value !== "object" || value === null) return key;
+      value = (value as Record<string, unknown>)[k];
     }
 
-    return value || key;
+    return typeof value === "string" ? value : key;
   };
 
   return (

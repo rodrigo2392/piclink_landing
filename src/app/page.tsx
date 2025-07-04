@@ -510,20 +510,41 @@ function PricingSection() {
       name: t("pricing.plans.starter.name"),
       price: "$100",
       description: t("pricing.plans.starter.description"),
-      features: t("pricing.plans.starter.features"),
+      features: [
+        "10GB storage space",
+        "100GB monthly bandwidth",
+        "Up to 10 client galleries",
+        "Basic analytics",
+        "Email support",
+      ],
     },
     {
       name: t("pricing.plans.professional.name"),
       price: "$300",
       description: t("pricing.plans.professional.description"),
-      features: t("pricing.plans.professional.features"),
+      features: [
+        "100GB storage space",
+        "1TB monthly bandwidth",
+        "Unlimited client galleries",
+        "Advanced analytics",
+        "Priority support",
+        "Custom branding",
+      ],
       popular: true,
     },
     {
       name: t("pricing.plans.studio.name"),
       price: "$1200",
       description: t("pricing.plans.studio.description"),
-      features: t("pricing.plans.studio.features"),
+      features: [
+        "500GB storage space",
+        "5TB monthly bandwidth",
+        "Team collaboration tools",
+        "Client CRM integration",
+        "24/7 priority support",
+        "Custom domain",
+        "API access",
+      ],
     },
   ];
 
@@ -580,14 +601,12 @@ function PricingSection() {
                     {plan.description}
                   </p>
                   <ul className="space-y-3 mb-6 h-60">
-                    {(plan.features as unknown as string[]).map(
-                      (feature, i) => (
-                        <li key={i} className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-blue-500 mr-2 shrink-0 mt-0.5" />
-                          <span>{feature}</span>
-                        </li>
-                      )
-                    )}
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-blue-500 mr-2 shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
                   </ul>
                   <Button
                     className={`w-full ${
